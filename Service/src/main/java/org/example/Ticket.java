@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Ticket implements SetClassId {
+public class Ticket implements SetClassId, ClassInfo{
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -178,6 +178,7 @@ public class Ticket implements SetClassId {
         return toReturn;
     }
 
+    @Override
     public void print(){
         System.out.println("Ticket information");
 
@@ -200,6 +201,7 @@ public class Ticket implements SetClassId {
         System.out.println("Ticket cost: " + this.cost);
     }
 
+    @Override
     public void print(FileWriter file) {
         if (file == null) {
             throw new IllegalArgumentException("FileWriter cannot be null");

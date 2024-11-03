@@ -1,10 +1,31 @@
 package org.example;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class TicketService implements SetClassId {
     private static int classID;
     public static void main(String[] args) {
 
     }
+
+    public void print(){
+
+        System.out.println("Ticket cost: " + this.cost);
+    }
+
+    public void print(FileWriter file) {
+        if (file == null) {
+            throw new IllegalArgumentException("FileWriter cannot be null");
+        }
+
+        try {
+            file.write("Class ID");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void SetId(int id){
         classID = id;
