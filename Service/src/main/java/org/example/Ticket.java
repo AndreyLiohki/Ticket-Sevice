@@ -21,7 +21,7 @@ public class Ticket implements SetClassId{
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
-    private boolean isPromo;
+    private isPromo isPromo;
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
@@ -34,7 +34,7 @@ public class Ticket implements SetClassId{
         this.concertHall = "UNDEFINED";
         this.day = LocalDate.of(2000, 01,01);
         this.time = LocalTime.of(00,00,00);
-        this.isPromo = false;
+        this.isPromo = org.example.isPromo.NO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     };
@@ -53,7 +53,7 @@ public class Ticket implements SetClassId{
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = false;
+        this.isPromo = org.example.isPromo.NO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     }
@@ -73,7 +73,13 @@ public class Ticket implements SetClassId{
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = isPromo;
+        if(isPromo){
+            this.isPromo = org.example.isPromo.YES;
+
+        }else{
+            this.isPromo = org.example.isPromo.NO;
+
+        }
         if(stadiumSector != 'A' && stadiumSector != 'B' && stadiumSector != 'C'){
             throw new IllegalArgumentException("The name of sectors must be A, B or C");
         }
@@ -82,6 +88,35 @@ public class Ticket implements SetClassId{
         this.cost = cost;
     }
 
+    public char[] GetTicketId(){
+        return this.ID;
+    }
+
+    public short GetTicketEvetCode(){
+        return this.eventCode;
+    }
+
+    public LocalDate GetTicketCreationDate(){
+        return this.creationDate;
+    }
+
+    public LocalTime GetTicketLocalTime(){
+        return this.creationTime;
+    }
+
+    public String GetTicketConcertHall(){
+        return this.concertHall;
+    }
+
+    public LocalDate GetTicketDay(){
+        return this.day;
+    }
+
+    public LocalTime GetTicketTime(){
+        return this.time;
+    }
+
+    public
     private char[] IDGenerator(){
         char[] generatedID = new char[ID_LENGTH];
         Random random = new Random();
