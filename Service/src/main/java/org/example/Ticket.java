@@ -116,7 +116,22 @@ public class Ticket implements SetClassId{
         return this.time;
     }
 
-    public
+    public isPromo GetTicketIsPromo(){
+        return this.isPromo;
+    }
+
+    public char GetTicketStadiumSector(){
+        return this.stadiumSector;
+    }
+
+    public double GetTicketMaxWeight(){
+        return this.maxWeight;
+    }
+
+    public BigDecimal GetTicketCost(){
+        return this.cost;
+    }
+    
     private char[] IDGenerator(){
         char[] generatedID = new char[ID_LENGTH];
         Random random = new Random();
