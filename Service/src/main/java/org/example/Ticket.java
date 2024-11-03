@@ -102,7 +102,7 @@ public class Ticket implements SetClassId {
         return this.creationDate;
     }
 
-    public LocalTime GetTicketLocalTime(){
+    public LocalTime GetTicketCreationTime(){
         return this.creationTime;
     }
 
