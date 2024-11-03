@@ -1,5 +1,6 @@
 package org.example;
 
+import java.net.SocketOption;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -7,7 +8,7 @@ import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 
-public class Ticket implements SetClassId{
+public class Ticket extends ClassContents implements SetClassId {
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -131,7 +132,7 @@ public class Ticket implements SetClassId{
     public BigDecimal GetTicketCost(){
         return this.cost;
     }
-    
+
     private char[] IDGenerator(){
         char[] generatedID = new char[ID_LENGTH];
         Random random = new Random();
@@ -174,4 +175,26 @@ public class Ticket implements SetClassId{
         return classID;
     }
 
+    @Override
+    public void print(){
+        System.out.println("Ticket information");
+
+        System.out.print("Ticket ID: ");
+        for(int i = 0; i < this.ID.length; ++i){
+            System.out.print(this.ID[i]);
+        }
+        System.out.println();
+
+        System.out.println("Ticket event code: " + this.eventCode);
+        System.out.println("Ticket date of creation: " + this.creationDate);
+        System.out.println("Ticket time of creation: " + this.creationTime);
+        System.out.println("Ticket concert hall: " + this.concertHall);
+        System.out.println("Ticket day of event: " + this.day);
+        System.out.println("Ticket time of event: " + this.time);
+        System.out.println("Ticket promo: " + this.isPromo);
+        System.out.println("Ticket stadium sector: " + this.stadiumSector);
+
+        System.out.println("Ticket max weight: " + this.maxWeight);
+        System.out.println("Ticket cost: " + this.cost);
+    }
 }
