@@ -134,6 +134,18 @@ public class Ticket implements SetClassId {
         return this.cost;
     }
 
+    public void SetStadiumSector(char sector){
+        this.stadiumSector = sector;
+    }
+
+    public void SetTicketDay(LocalDate date){
+        this.day = date;
+    }
+
+    public void SetTicketDay(LocalTime time){
+        this.time = time;
+    }
+
     private char[] IDGenerator(){
         char[] generatedID = new char[ID_LENGTH];
         Random random = new Random();
