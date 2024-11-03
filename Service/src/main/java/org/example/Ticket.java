@@ -1,6 +1,5 @@
 package org.example;
 
-import java.net.SocketOption;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
