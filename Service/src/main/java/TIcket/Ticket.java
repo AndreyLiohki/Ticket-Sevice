@@ -11,6 +11,7 @@ import java.util.Set;
 import java.math.BigDecimal;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class Ticket implements SetClassId, ClassInfo {
     private static int classID;
@@ -193,7 +194,8 @@ public class Ticket implements SetClassId, ClassInfo {
 
         System.out.println("Ticket event code: " + this.eventCode);
         System.out.println("Ticket date of creation: " + this.creationDate);
-        System.out.println("Ticket time of creation: " + this.creationTime);
+        String formattedTime = this.creationTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        System.out.println("Ticket time of creation: " + formattedTime);
         System.out.println("Ticket concert hall: " + this.concertHall);
         System.out.println("Ticket day of event: " + this.day);
         System.out.println("Ticket time of event: " + this.time);
@@ -221,7 +223,8 @@ public class Ticket implements SetClassId, ClassInfo {
 
             file.write("Ticket event code: " + this.eventCode + "\n");
             file.write("Ticket date of creation: " + this.creationDate + "\n");
-            file.write("Ticket time of creation: " + this.creationTime + "\n");
+            String formattedTime = this.creationTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+            file.write("Ticket time of creation: " + formattedTime + "\n");
             file.write("Ticket concert hall: " + this.concertHall + "\n");
             file.write("Ticket day of event: " + this.day + "\n");
             file.write("Ticket time of event: " + this.time + "\n");

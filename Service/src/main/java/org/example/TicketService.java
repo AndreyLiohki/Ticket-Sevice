@@ -1,11 +1,34 @@
 package org.example;
 
+import SendingTheTelephone.TicketSending;
+import TIcket.Ticket;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDate;
+import SendingTheTelephone.TelephoneSending;
+import SendingTheTelephone.EmailSending;
 public class TicketService implements SetClassId, ClassInfo {
     private static int classID;
     public static void main(String[] args) {
+
+        Ticket ticket = new Ticket();
+        ticket.SetId(4739);
+        ticket.SetTicketDay(LocalDate.now());
+
+        try(FileWriter writer = new FileWriter("info.txt")){
+            ticket.print(writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ticket.print();
+        System.out.println();
+
+        TicketSending sender = new TelephoneSending();
+        sender.shared(ticket);
+
+        TicketSending sender2= new EmailSending();
+        sender2.shared(ticket);
 
     }
 
