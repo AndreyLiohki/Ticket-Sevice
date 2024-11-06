@@ -1,6 +1,8 @@
-package org.example;
+package Users;
 
-public class Admin extends User{
+import TIcket.Ticket;
+
+public class Admin extends User {
     private static String role = "ADMIN";
 
     @Override

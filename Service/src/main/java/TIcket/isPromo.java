@@ -1,4 +1,4 @@
-package org.example;
+package TIcket;
 
 public enum isPromo {
     YES,

@@ -1,6 +1,8 @@
-package org.example;
+package SendingTheTelephone;
 
-public class EmailSending extends TicketSending{
+import TIcket.Ticket;
+
+public class EmailSending extends TicketSending {
     @Override
     public void shared(Ticket ticket){
         System.out.println("Ticket ID " + ticket.GetTicketId()[0] +  ticket.GetTicketId()[1] + ticket.GetTicketId()[2] + ticket.GetTicketId()[3]+ "have been shared by email");

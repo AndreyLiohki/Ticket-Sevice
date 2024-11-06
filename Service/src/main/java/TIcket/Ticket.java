@@ -1,4 +1,7 @@
-package org.example;
+package TIcket;
+
+import org.example.ClassInfo;
+import org.example.SetClassId;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,7 +12,7 @@ import java.math.BigDecimal;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Ticket implements SetClassId, ClassInfo{
+public class Ticket implements SetClassId, ClassInfo {
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -23,7 +26,7 @@ public class Ticket implements SetClassId, ClassInfo{
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
-    private isPromo isPromo;
+    private TIcket.isPromo isPromo;
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
@@ -36,7 +39,7 @@ public class Ticket implements SetClassId, ClassInfo{
         this.concertHall = "UNDEFINED";
         this.day = LocalDate.of(2000, 01,01);
         this.time = LocalTime.of(00,00,00);
-        this.isPromo = org.example.isPromo.NO;
+        this.isPromo = TIcket.isPromo.NO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     };
@@ -55,7 +58,7 @@ public class Ticket implements SetClassId, ClassInfo{
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = org.example.isPromo.NO;
+        this.isPromo = TIcket.isPromo.NO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     }
@@ -76,10 +79,10 @@ public class Ticket implements SetClassId, ClassInfo{
         this.day = day;
         this.time = time;
         if(isPromo){
-            this.isPromo = org.example.isPromo.YES;
+            this.isPromo = TIcket.isPromo.YES;
 
         }else{
-            this.isPromo = org.example.isPromo.NO;
+            this.isPromo = TIcket.isPromo.NO;
 
         }
         if(stadiumSector != 'A' && stadiumSector != 'B' && stadiumSector != 'C'){

@@ -1,6 +1,8 @@
-package org.example;
+package Users;
 
-public class Client extends User{
+import TIcket.Ticket;
+
+public class Client extends User {
     private static String role = "CLIENT";
     @Override
     public void PrintRole(){
