@@ -145,7 +145,7 @@ public class Ticket implements SetClassId, ClassInfo {
         this.day = date;
     }
 
-    public void SetTicketDay(LocalTime time){
+    public void SetTicketTime(LocalTime time){
         this.time = time;
     }
 
@@ -244,4 +244,24 @@ public class Ticket implements SetClassId, ClassInfo {
         return classID;
     }
 
+    @Override
+    public String toString(){
+        return "Ticket{" + "ticketId = " + ID.toString() +
+                ", event code = " + eventCode + ", creation date = " + creationDate +
+                ", creation time = " + creationTime;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.hashCode();
+    }
 }
