@@ -7,12 +7,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import SendingTheTelephone.TelephoneSending;
 import SendingTheTelephone.EmailSending;
+import Users.*;
+
 public class TicketService implements SetClassId, ClassInfo {
     private static int classID;
     public static void main(String[] args) {
 
         Ticket ticket = new Ticket();
         ticket.SetId(4739);
+        System.out.println(ticket.GetId());
+        System.out.println();
+
         ticket.SetTicketDay(LocalDate.now());
 
         try(FileWriter writer = new FileWriter("info.txt")){
@@ -26,9 +31,18 @@ public class TicketService implements SetClassId, ClassInfo {
 
         TicketSending sender = new TelephoneSending();
         sender.shared(ticket);
+        System.out.println();
 
         TicketSending sender2= new EmailSending();
         sender2.shared(ticket);
+        System.out.println();
+
+        User user = new Admin();
+        user.PrintRole();
+        System.out.println();
+
+        User user2 = new Client();
+        user2.PrintRole();
 
     }
 
