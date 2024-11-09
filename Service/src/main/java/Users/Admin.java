@@ -9,7 +9,5 @@ public class Admin extends User {
     public void PrintRole(){
         System.out.println(role);
     }
-    public void checkTicket(Ticket ticket){
-        System.out.print(ticket.GetTicketId() + "has been checked");
-    }
+
 }

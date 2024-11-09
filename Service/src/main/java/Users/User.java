@@ -1,5 +1,5 @@
 package Users;
 
-public class User {
-    public void PrintRole(){};
+public abstract class User {
+    abstract public void PrintRole();
 }

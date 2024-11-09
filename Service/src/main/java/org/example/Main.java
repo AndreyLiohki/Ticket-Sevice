@@ -1,14 +1,13 @@
 package org.example;
 
-import SendingTheTelephone.EmailSending;
-import SendingTheTelephone.TelephoneSending;
-import SendingTheTelephone.TicketSending;
+import Senders.EmailSender;
+import Senders.TelSender;
+import Senders.Sender;
 import TIcket.Ticket;
 import Users.Admin;
 import Users.Client;
 import Users.User;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -32,11 +31,11 @@ public class Main {
         ticket.print();
         System.out.println();
 
-        TicketSending sender = new TelephoneSending();
+        Sender sender = new TelSender();
         sender.shared(ticket);
         System.out.println();
 
-        TicketSending sender2= new EmailSending();
+        Sender sender2= new EmailSender();
         sender2.shared(ticket);
         System.out.println();
 

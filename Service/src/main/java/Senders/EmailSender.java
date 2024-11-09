@@ -1,14 +1,13 @@
-package SendingTheTelephone;
+package Senders;
 
 import TIcket.Ticket;
 
 import java.time.format.DateTimeFormatter;
 
-public class EmailSending extends TicketSending {
+public class EmailSender extends Sender {
     @Override
     public void shared(Ticket ticket){
         String formattedTime = ticket.GetTicketCreationTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-
         System.out.println("Ticket ID " + ticket.GetTicketId()[0] +  ticket.GetTicketId()[1] + ticket.GetTicketId()[2] + ticket.GetTicketId()[3]+ " have been shared by email");
         System.out.println("Ticket event code " + ticket.GetTicketEvetCode() + " have been shared by email");
         System.out.println("Ticket creation date " + ticket.GetTicketCreationDate() + " have been shared by email");
