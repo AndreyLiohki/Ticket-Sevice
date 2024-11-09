@@ -16,37 +16,7 @@ public class Main implements SetClassId, classContent {
     private static int classID;
 
     public static void main(String[] args) {
-
-        Ticket ticket = new Ticket();
-        ticket.setId(4739);
-        System.out.println(ticket.getId());
-        System.out.println();
-
-        ticket.SetTicketDay(LocalDate.now());
-
-        try(FileWriter writer = new FileWriter("info.txt")){
-            ticket.print(writer);
-        } catch (IOException e) {
-            System.out.println("There is no possibility to create output file");
-        }
-
-        ticket.print();
-        System.out.println();
-
-        Sender sender = new TelSender();
-        sender.shared(ticket);
-        System.out.println();
-
-        Sender sender2= new EmailSender();
-        sender2.shared(ticket);
-        System.out.println();
-
-        User user = new Admin();
-        user.PrintRole();
-        System.out.println();
-
-        User user2 = new Client();
-        user2.PrintRole();
+        
     }
 
     @Override

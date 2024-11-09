@@ -3,7 +3,13 @@ package Users;
 import TIcket.Ticket;
 
 public class Admin extends User {
+    private static int classId;
     private static String role = "ADMIN";
+
+    //Used as a stub method
+    public void checkTicket(Ticket ticket){
+        System.out.println(ticket.GetTicketId() + " ticket is checked");
+    }
 
     @Override
     public void PrintRole(){
