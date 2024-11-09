@@ -1,22 +1,13 @@
 package org.example;
 
-import Senders.EmailSender;
-import Senders.TelSender;
-import Senders.Sender;
-import TIcket.Ticket;
-import Users.Admin;
-import Users.Client;
-import Users.User;
-
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class Main implements SetClassId, classContent {
     private static int classID;
 
     public static void main(String[] args) {
-        
+
     }
 
     @Override
