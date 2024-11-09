@@ -251,7 +251,9 @@ public class Ticket implements SetClassId, classContent {
     public String toString(){
         return "Ticket{" + "ticketId = " + ID.toString() +
                 ", event code = " + eventCode + ", creation date = " + creationDate +
-                ", creation time = " + creationTime;
+                ", creation time = " + creationTime + ", concert hall = " + concertHall +
+                ", day = " + day + ", time = " + time + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
+                ", max weight = " + maxWeight + ", cost = " + cost + "}";
     }
 
     @Override
