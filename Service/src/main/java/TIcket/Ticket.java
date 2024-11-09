@@ -238,12 +238,12 @@ public class Ticket implements SetClassId, ClassInfo {
     }
 
     @Override
-    public void SetId(int id){
+    public void setId(int id){
         classID = id;
     }
 
     @Override
-    public int GetId(){
+    public int getId(){
         return classID;
     }
 

@@ -1,21 +1,24 @@
 package org.example;
 
+import SendingTheTelephone.EmailSending;
+import SendingTheTelephone.TelephoneSending;
 import SendingTheTelephone.TicketSending;
 import TIcket.Ticket;
+import Users.Admin;
+import Users.Client;
+import Users.User;
+
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import SendingTheTelephone.TelephoneSending;
-import SendingTheTelephone.EmailSending;
-import Users.*;
 
-public class TicketService implements SetClassId, ClassInfo {
-    private static int classID;
+public class Main {
     public static void main(String[] args) {
 
         Ticket ticket = new Ticket();
-        ticket.SetId(4739);
-        System.out.println(ticket.GetId());
+        ticket.setId(4739);
+        System.out.println(ticket.getId());
         System.out.println();
 
         ticket.SetTicketDay(LocalDate.now());
@@ -23,7 +26,7 @@ public class TicketService implements SetClassId, ClassInfo {
         try(FileWriter writer = new FileWriter("info.txt")){
             ticket.print(writer);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("There is no possibility to create output file");
         }
 
         ticket.print();
@@ -44,34 +47,5 @@ public class TicketService implements SetClassId, ClassInfo {
         User user2 = new Client();
         user2.PrintRole();
 
-    }
-
-    @Override
-    public void print(){
-
-        System.out.println("Class Id: " + classID);
-    }
-
-    @Override
-    public void print(FileWriter file) {
-        if (file == null) {
-            throw new IllegalArgumentException("FileWriter cannot be null");
-        }
-
-        try {
-            file.write("Class ID: " + classID);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void SetId(int id){
-        classID = id;
-    }
-
-    @Override
-    public int GetId(){
-        return classID;
     }
 }
