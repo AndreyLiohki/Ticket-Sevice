@@ -180,6 +180,7 @@ public class Ticket extends printContent implements SetClassId{
         return toReturn;
     }
 
+    @Override
     public void print(){
         System.out.println("Ticket information");
 
