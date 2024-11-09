@@ -94,63 +94,63 @@ public class Ticket implements SetClassId, classContent {
         this.cost = cost;
     }
 
-    public char[] GetTicketId(){
+    public char[] getTicketId(){
         return this.ID;
     }
 
-    public short GetTicketEvetCode(){
+    public short getTicketEvetCode(){
         return this.eventCode;
     }
 
-    public LocalDate GetTicketCreationDate(){
+    public LocalDate getTicketCreationDate(){
         return this.creationDate;
     }
 
-    public LocalTime GetTicketCreationTime(){
+    public LocalTime getTicketCreationTime(){
         return this.creationTime;
     }
 
-    public String GetTicketConcertHall(){
+    public String getTicketConcertHall(){
         return this.concertHall;
     }
 
-    public LocalDate GetTicketDay(){
+    public LocalDate getTicketDay(){
         return this.day;
     }
 
-    public LocalTime GetTicketTime(){
+    public LocalTime getTicketTime(){
         return this.time;
     }
 
-    public isPromo GetTicketIsPromo(){
+    public isPromo getTicketIsPromo(){
         return this.isPromo;
     }
 
-    public char GetTicketStadiumSector(){
+    public char getTicketStadiumSector(){
         return this.stadiumSector;
     }
 
-    public double GetTicketMaxWeight(){
+    public double getTicketMaxWeight(){
         return this.maxWeight;
     }
 
-    public BigDecimal GetTicketCost(){
+    public BigDecimal getTicketCost(){
         return this.cost;
     }
 
-    public void SetStadiumSector(char sector){
+    public void setStadiumSector(char sector){
         this.stadiumSector = sector;
     }
 
-    public void SetTicketDay(LocalDate date){
+    public void setTicketDay(LocalDate date){
         this.day = date;
     }
 
-    public void SetTicketTime(LocalTime time){
+    public void setTicketTime(LocalTime time){
         this.time = time;
     }
 
-    private char[] IDGenerator(){
+    private char[] iDGenerator(){
         char[] generatedID = new char[ID_LENGTH];
         Random random = new Random();
 
@@ -170,7 +170,7 @@ public class Ticket implements SetClassId, classContent {
         String id = "";
         char[] toReturn = new char[4];
         do {
-            char[] idChars = IDGenerator();
+            char[] idChars = iDGenerator();
 
             if (uniquenessChecker(idChars)) {
                 id = new String(idChars);
