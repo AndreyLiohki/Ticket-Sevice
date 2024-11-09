@@ -7,9 +7,8 @@ public class Client extends User {
     private static String role = "CLIENT";
 
     //Used as a stub method
-    public Ticket getTicket(){
-        Ticket ticket = new Ticket();
-        return ticket;
+    public void getTicket(Ticket ticket){
+        System.out.println(ticket.getTicketId() + " Ticket has been got");
     }
 
     @Override

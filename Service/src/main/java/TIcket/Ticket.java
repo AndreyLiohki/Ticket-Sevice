@@ -1,7 +1,7 @@
 package TIcket;
 
-import org.example.classContent;
 import org.example.SetClassId;
+import org.example.printContent;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,11 +9,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-public class Ticket implements SetClassId, classContent {
+public class Ticket extends printContent implements SetClassId{
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -182,7 +180,6 @@ public class Ticket implements SetClassId, classContent {
         return toReturn;
     }
 
-    @Override
     public void print(){
         System.out.println("Ticket information");
 
@@ -204,37 +201,6 @@ public class Ticket implements SetClassId, classContent {
 
         System.out.println("Ticket max weight: " + this.maxWeight);
         System.out.println("Ticket cost: " + this.cost);
-    }
-
-    @Override
-    public void print(FileWriter file) {
-        if (file == null) {
-            throw new IllegalArgumentException("FileWriter cannot be null");
-        }
-
-        try {
-            file.write("Ticket information\n");
-
-            file.write("Ticket ID: ");
-            for (int i = 0; i < this.ID.length; ++i) {
-                file.write(this.ID[i]);
-            }
-            file.write("\n");
-
-            file.write("Ticket event code: " + this.eventCode + "\n");
-            file.write("Ticket date of creation: " + this.creationDate + "\n");
-            String formattedTime = this.creationTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-            file.write("Ticket time of creation: " + formattedTime + "\n");
-            file.write("Ticket concert hall: " + this.concertHall + "\n");
-            file.write("Ticket day of event: " + this.day + "\n");
-            file.write("Ticket time of event: " + this.time + "\n");
-            file.write("Ticket promo: " + this.isPromo + "\n");
-            file.write("Ticket stadium sector: " + this.stadiumSector + "\n");
-            file.write("Ticket max weight: " + this.maxWeight + "\n");
-            file.write("Ticket cost: " + this.cost + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
