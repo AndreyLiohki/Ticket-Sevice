@@ -12,7 +12,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class Main {
+public class Main implements SetClassId, classContent {
+    private static int classID;
+
     public static void main(String[] args) {
 
         Ticket ticket = new Ticket();
@@ -45,6 +47,34 @@ public class Main {
 
         User user2 = new Client();
         user2.PrintRole();
+    }
 
+    @Override
+    public void print(){
+
+        System.out.println("Class Id: " + classID);
+    }
+
+    @Override
+    public void print(FileWriter file) {
+        if (file == null) {
+            throw new IllegalArgumentException("FileWriter cannot be null");
+        }
+
+        try {
+            file.write("Class ID: " + classID);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setId(int id){
+        classID = id;
+    }
+
+    @Override
+    public int getId(){
+        return classID;
     }
 }

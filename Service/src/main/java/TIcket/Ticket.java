@@ -1,6 +1,6 @@
 package TIcket;
 
-import org.example.ClassInfo;
+import org.example.classContent;
 import org.example.SetClassId;
 
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-public class Ticket implements SetClassId, ClassInfo {
+public class Ticket implements SetClassId, classContent {
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -40,7 +40,7 @@ public class Ticket implements SetClassId, ClassInfo {
         this.concertHall = "UNDEFINED";
         this.day = LocalDate.of(2000, 01,01);
         this.time = LocalTime.of(00,00,00);
-        this.isPromo = TIcket.isPromo.NO;
+        this.isPromo = TIcket.isPromo.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     };
@@ -59,7 +59,7 @@ public class Ticket implements SetClassId, ClassInfo {
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = TIcket.isPromo.NO;
+        this.isPromo = TIcket.isPromo.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     }
