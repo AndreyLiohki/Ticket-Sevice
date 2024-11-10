@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
+import java.io.FileWriter;
 
 public class Ticket extends printContent implements SetClassId{
     private static int classID;
@@ -181,30 +182,6 @@ public class Ticket extends printContent implements SetClassId{
     }
 
     @Override
-    public void print(){
-        System.out.println("Ticket information");
-
-        System.out.print("Ticket ID: ");
-        for(int i = 0; i < this.ID.length; ++i){
-            System.out.print(this.ID[i]);
-        }
-        System.out.println();
-
-        System.out.println("Ticket event code: " + this.eventCode);
-        System.out.println("Ticket date of creation: " + this.creationDate);
-        String formattedTime = this.creationTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println("Ticket time of creation: " + formattedTime);
-        System.out.println("Ticket concert hall: " + this.concertHall);
-        System.out.println("Ticket day of event: " + this.day);
-        System.out.println("Ticket time of event: " + this.time);
-        System.out.println("Ticket promo: " + this.isPromo);
-        System.out.println("Ticket stadium sector: " + this.stadiumSector);
-
-        System.out.println("Ticket max weight: " + this.maxWeight);
-        System.out.println("Ticket cost: " + this.cost);
-    }
-
-    @Override
     public void setId(int id){
         classID = id;
     }
@@ -216,10 +193,13 @@ public class Ticket extends printContent implements SetClassId{
 
     @Override
     public String toString(){
-        return "Ticket{" + "ticketId = " + ID.toString() +
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String eventTime = time.format(formatter);
+        String timeOfCreation = creationTime.format(formatter);
+        return "Ticket{" + "ticketId = " + String.valueOf(ID) +
                 ", event code = " + eventCode + ", creation date = " + creationDate +
-                ", creation time = " + creationTime + ", concert hall = " + concertHall +
-                ", day = " + day + ", time = " + time + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
+                ", creation time = " + timeOfCreation + ", concert hall = " + concertHall +
+                ", day = " + day + ", time = " + eventTime + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
                 ", max weight = " + maxWeight + ", cost = " + cost + "}";
     }
 

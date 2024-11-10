@@ -1,12 +1,20 @@
 package org.example;
 
+import TIcket.Ticket;
+import Users.Admin;
+import Users.User;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Main implements SetClassId, classContent {
+public class Main extends printContent implements SetClassId {
     private static int classID;
 
     public static void main(String[] args) {
+        Ticket ticket = new Ticket();
+        ticket.print();
+
+        User client = new Admin();
 
     }
 
@@ -14,19 +22,6 @@ public class Main implements SetClassId, classContent {
     public void print(){
 
         System.out.println("Class Id: " + classID);
-    }
-
-    @Override
-    public void print(FileWriter file) {
-        if (file == null) {
-            throw new IllegalArgumentException("FileWriter cannot be null");
-        }
-
-        try {
-            file.write("Class ID: " + classID);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
