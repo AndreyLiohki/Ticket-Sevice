@@ -23,6 +23,7 @@ public class Ticket extends printContent implements SetClassId{
     private LocalDate creationDate;
     private LocalTime creationTime;
 
+    private ticketTypes ticketType;
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
@@ -42,6 +43,7 @@ public class Ticket extends printContent implements SetClassId{
         this.isPromo = TIcket.isPromo.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
+        this.ticketType = ticketTypes.NOINFO;
     };
 
     public Ticket(String concertHall, short eventCode, LocalDate day, LocalTime time){
@@ -61,10 +63,11 @@ public class Ticket extends printContent implements SetClassId{
         this.isPromo = TIcket.isPromo.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
+        this.ticketType = ticketTypes.NOINFO;
     }
 
     public Ticket(short eventCode, String concertHall, LocalDate day, LocalTime time,
-                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost){
+                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, int ticketType){
         this.ID = generateId();
         if(eventCode<100 || eventCode>999) {
             throw new IllegalArgumentException("Enter 3-digit code");
@@ -91,6 +94,18 @@ public class Ticket extends printContent implements SetClassId{
         this.stadiumSector = stadiumSector;
         this.maxWeight = maxWeight;
         this.cost = cost;
+        if(ticketType == 0){
+            this.ticketType = ticketTypes.NOINFO;
+        }else if(ticketType == 1){
+            this.ticketType = ticketTypes.DAY;
+        }else if(ticketType == 2){
+            this.ticketType = ticketTypes.WEEK;
+        }else if(ticketType == 3){
+            this.ticketType = ticketTypes.MONTH;
+        }else if(ticketType == 4){
+            this.ticketType = ticketTypes.YEAR;
+
+        }
     }
 
     public char[] getTicketId(){
