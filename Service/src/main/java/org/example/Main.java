@@ -3,9 +3,10 @@ package org.example;
 import TIcket.Ticket;
 import Users.Admin;
 import Users.User;
+import Reader.ReadFile;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends printContent implements SetClassId {
     private static int classID;
@@ -15,6 +16,13 @@ public class Main extends printContent implements SetClassId {
         ticket.print();
 
         User client = new Admin();
+        ReadFile reader = new ReadFile();
+
+        List<Ticket> tickets  = reader.readTicketsFromFile("input.txt");
+        for(Ticket item:tickets){
+            item.print();
+        }
+
 
     }
 
