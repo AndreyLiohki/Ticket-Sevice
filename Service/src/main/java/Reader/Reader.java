@@ -1,5 +1,6 @@
 package Reader;
 
+import Validator.Validator;
 import org.example.SetClassId;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,10 +26,16 @@ public class Reader implements SetClassId {
                 LocalDate creationDate = LocalDate.parse(parts[0]);
                 LocalTime creationTime = LocalTime.parse(parts[1]);
                 String typeOfTicket = parts[2].toUpperCase();
-                ticketTypes ticketType = ticketTypes.valueOf(parts[2].toUpperCase());
                 BigDecimal cost = new BigDecimal(parts[3]);
+                Validator validator = new Validator();
+                if(validator.isValidTicket(creationDate, typeOfTicket, cost)){
+                    ticketTypes ticketType = ticketTypes.valueOf(parts[2].toUpperCase());
+                    tickets.add(new Ticket(creationDate, creationTime, ticketType, cost));
+                    System.out.println("Ticket was successfully read");
+                }else{
+                    System.out.println("Error. Invalid ticket data");
+                }
 
-                tickets.add(new Ticket(creationDate, creationTime, ticketType, cost));
             }
         } catch (IOException e) {
             e.printStackTrace();
