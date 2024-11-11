@@ -66,6 +66,27 @@ public class Ticket extends printContent implements SetClassId{
         this.ticketType = ticketTypes.NOINFO;
     }
 
+    public Ticket(LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost){
+        this.ID = generateId();
+        if(eventCode<100 || eventCode>999){
+            throw new IllegalArgumentException("Enter 3-digit code");
+        }
+        this.eventCode = eventCode;
+        this.creationDate = creationDate;
+        this.creationTime = creationTime;
+        if(concertHall.length()>10){
+            throw new IllegalArgumentException("The name of the concert hall should not exceed 10 characters");
+        }
+        this.concertHall = concertHall;
+        this.day = day;
+        this.time = time;
+        this.isPromo = TIcket.isPromo.NOINFO;
+        this.stadiumSector = '\u0000';
+        this.maxWeight = 0;
+        this.cost = cost;
+        this.ticketType = ticketType;
+    }
+
     public Ticket(short eventCode, String concertHall, LocalDate day, LocalTime time,
                   boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, int ticketType){
         this.ID = generateId();
