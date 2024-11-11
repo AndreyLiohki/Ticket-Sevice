@@ -24,6 +24,7 @@ public class Reader implements SetClassId {
                 String[] parts = line.split(",");
                 LocalDate creationDate = LocalDate.parse(parts[0]);
                 LocalTime creationTime = LocalTime.parse(parts[1]);
+                String typeOfTicket = parts[2].toUpperCase();
                 ticketTypes ticketType = ticketTypes.valueOf(parts[2].toUpperCase());
                 BigDecimal cost = new BigDecimal(parts[3]);
 
@@ -31,10 +32,7 @@ public class Reader implements SetClassId {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            System.err.println("Invalid ticket type in file: " + e.getMessage());
         }
-
         return tickets;
     }
     @Override
