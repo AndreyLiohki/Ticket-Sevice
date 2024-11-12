@@ -2,7 +2,7 @@ package Reader;
 
 import org.example.SetClassId;
 
-public class Reader implements SetClassId {
+public class Reader extends SetClassId {
     private static int classId;
 
     @Override

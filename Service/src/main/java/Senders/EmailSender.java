@@ -5,7 +5,7 @@ import org.example.SetClassId;
 
 import java.time.format.DateTimeFormatter;
 
-public class EmailSender implements TicketSender, SetClassId {
+public class EmailSender extends SetClassId implements TicketSender {
     private static int classId;
     @Override
     public void share(Ticket ticket){

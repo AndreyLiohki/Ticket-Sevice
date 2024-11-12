@@ -1,7 +1,6 @@
 package Users;
 
-import org.example.printContent;
 
-public abstract class User extends printContent {
+public abstract class User  {
     abstract public void PrintRole();
 }

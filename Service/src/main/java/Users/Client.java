@@ -3,7 +3,7 @@ package Users;
 import TIcket.Ticket;
 import org.example.SetClassId;
 
-public class Client extends User implements SetClassId {
+public class Client extends User {
     private static int classId;
     private static String role = "CLIENT";
 
@@ -17,13 +17,4 @@ public class Client extends User implements SetClassId {
         System.out.println(role);
     }
 
-    @Override
-    public void setId(int id){
-        classId = id;
-    }
-
-    @Override
-    public int getId(){
-        return classId;
-    }
 }
