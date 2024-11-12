@@ -1,6 +1,7 @@
 package Reader;
 
 import Validator.Validator;
+import org.example.Print;
 import org.example.SetClassId;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import TIcket.ticketTypes;
 import TIcket.Ticket;
 import java.time.LocalDate;
 
-public class ReadFile implements SetClassId {
+public class ReadFile extends SetClassId {
     private static int classId;
 
     public static List<Ticket> readTicketsFromFile(String filePath) {
@@ -42,6 +43,7 @@ public class ReadFile implements SetClassId {
         }
         return tickets;
     }
+
     @Override
     public void setId(int id){
         classId = id;
@@ -51,4 +53,5 @@ public class ReadFile implements SetClassId {
     public int getId(){
         return classId;
     }
+
 }

@@ -1,10 +1,9 @@
 package Users;
 
 import TIcket.Ticket;
-import org.example.SetClassId;
+import org.example.Print;
 
-public class Client extends User implements SetClassId {
-    private static int classId;
+public class Client extends User {
     private static String role = "CLIENT";
 
     //Used as a stub method
@@ -17,13 +16,4 @@ public class Client extends User implements SetClassId {
         System.out.println(role);
     }
 
-    @Override
-    public void setId(int id){
-        classId = id;
-    }
-
-    @Override
-    public int getId(){
-        return classId;
-    }
 }

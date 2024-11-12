@@ -8,7 +8,7 @@ import Reader.ReadFile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends printContent implements SetClassId {
+public class Main extends SetClassId implements Print {
     private static int classID;
 
     public static void main(String[] args) {

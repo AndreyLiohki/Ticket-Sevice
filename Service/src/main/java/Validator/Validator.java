@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Validator implements SetClassId {
+public class Validator extends SetClassId {
     private static int classId;
 
     private static Set<String> validValues = new HashSet<>();

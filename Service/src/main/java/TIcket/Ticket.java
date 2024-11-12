@@ -1,7 +1,7 @@
 package TIcket;
 
 import org.example.SetClassId;
-import org.example.printContent;
+import org.example.Print;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,9 +10,8 @@ import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
-import java.io.FileWriter;
 
-public class Ticket extends printContent implements SetClassId{
+public class Ticket extends SetClassId implements Print{
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -209,6 +208,11 @@ public class Ticket extends printContent implements SetClassId{
         }
         while(id == null);
         return toReturn;
+    }
+
+    @Override
+    public void print(){
+        System.out.println(this.toString());
     }
 
     @Override

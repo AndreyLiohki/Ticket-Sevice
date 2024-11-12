@@ -1,6 +1,6 @@
 package org.example;
 
-public interface SetClassId {
-    void setId(int id);
-    int getId();
+public abstract class SetClassId {
+    abstract public void setId(int id);
+    abstract public int getId();
 }
