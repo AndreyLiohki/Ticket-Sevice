@@ -1,5 +1,5 @@
 package org.example;
 
-public interface Print {
+public interface Printable {
     void print();
 }

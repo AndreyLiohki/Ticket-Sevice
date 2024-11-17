@@ -1,9 +1,7 @@
-package TIcket;
+package ticket;
 
-import org.example.Print;
-import org.example.SetClassId;
-import org.example.Print;
-
+import org.example.Printable;
+import org.example.ClassId;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -11,10 +9,8 @@ import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
-import java.io.FileWriter;
 
-public class Ticket extends SetClassId implements Print {
-    private static int classID;
+public class Ticket extends ClassId implements Printable {
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
     private static Set<String> generatedIDs = new HashSet<>();
@@ -27,7 +23,7 @@ public class Ticket extends SetClassId implements Print {
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
-    private TIcket.isPromo isPromo;
+    private PromotionAvailabilities PromotionAvailabilities;
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
@@ -38,9 +34,9 @@ public class Ticket extends SetClassId implements Print {
         this.creationDate = LocalDate.now();
         this.creationTime = LocalTime.now();
         this.concertHall = "UNDEFINED";
-        this.day = LocalDate.of(2000, 01,01);
-        this.time = LocalTime.of(00,00,00);
-        this.isPromo = TIcket.isPromo.NOINFO;
+        this.day = LocalDate.now();
+        this.time = LocalTime.now();
+        this.PromotionAvailabilities = PromotionAvailabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     };
@@ -59,7 +55,7 @@ public class Ticket extends SetClassId implements Print {
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = TIcket.isPromo.NOINFO;
+        this.PromotionAvailabilities = PromotionAvailabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
     }
@@ -80,10 +76,10 @@ public class Ticket extends SetClassId implements Print {
         this.day = day;
         this.time = time;
         if(isPromo){
-            this.isPromo = TIcket.isPromo.YES;
+            this.PromotionAvailabilities = PromotionAvailabilities.YES;
 
         }else{
-            this.isPromo = TIcket.isPromo.NO;
+            this.PromotionAvailabilities = PromotionAvailabilities.NO;
 
         }
         if(stadiumSector != 'A' && stadiumSector != 'B' && stadiumSector != 'C'){
@@ -98,7 +94,7 @@ public class Ticket extends SetClassId implements Print {
         return this.ID;
     }
 
-    public short getTicketEvetCode(){
+    public short getTicketEventCode(){
         return this.eventCode;
     }
 
@@ -122,8 +118,8 @@ public class Ticket extends SetClassId implements Print {
         return this.time;
     }
 
-    public isPromo getTicketIsPromo(){
-        return this.isPromo;
+    public PromotionAvailabilities getTicketIsPromo(){
+        return this.PromotionAvailabilities;
     }
 
     public char getTicketStadiumSector(){
@@ -188,12 +184,12 @@ public class Ticket extends SetClassId implements Print {
     }
     @Override
     public void setId(int id){
-        classID = id;
+        classId = id;
     }
 
     @Override
     public int getId(){
-        return classID;
+        return classId;
     }
 
     @Override
@@ -204,7 +200,7 @@ public class Ticket extends SetClassId implements Print {
         return "Ticket{" + "ticketId = " + String.valueOf(ID) +
                 ", event code = " + eventCode + ", creation date = " + creationDate +
                 ", creation time = " + timeOfCreation + ", concert hall = " + concertHall +
-                ", day = " + day + ", time = " + eventTime + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
+                ", day = " + day + ", time = " + eventTime + ", is promo = " + PromotionAvailabilities + ", stadium sector = " + stadiumSector +
                 ", max weight = " + maxWeight + ", cost = " + cost + "}";
     }
 

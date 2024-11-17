@@ -1,6 +1,6 @@
-package Senders;
+package senders;
 
-import TIcket.Ticket;
+import ticket.Ticket;
 
 public interface TicketSender {
     void share(Ticket ticket);
