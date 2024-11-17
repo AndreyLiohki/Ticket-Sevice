@@ -1,22 +1,19 @@
 package org.example;
 
-import TIcket.Ticket;
-import Users.Admin;
-import Users.User;
-import Reader.ReadFile;
+import ticket.Ticket;
+import users.Admin;
+import users.User;
+import reader.FileReader;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends SetClassId implements Print {
-    private static int classID;
-
+public class Main {
     public static void main(String[] args) {
         Ticket ticket = new Ticket();
         ticket.print();
 
         User client = new Admin();
-        ReadFile reader = new ReadFile();
+        FileReader reader = new FileReader();
 
         List<Ticket> tickets  = reader.readTicketsFromFile("input.txt");
         for(Ticket item:tickets){
@@ -24,21 +21,5 @@ public class Main extends SetClassId implements Print {
         }
 
 
-    }
-
-    @Override
-    public void print(){
-
-        System.out.println("Class Id: " + classID);
-    }
-
-    @Override
-    public void setId(int id){
-        classID = id;
-    }
-
-    @Override
-    public int getId(){
-        return classID;
     }
 }

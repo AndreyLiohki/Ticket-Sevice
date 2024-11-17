@@ -1,4 +1,4 @@
-package TIcket;
+package ticket;
 
 public enum ticketTypes {
     DAY,

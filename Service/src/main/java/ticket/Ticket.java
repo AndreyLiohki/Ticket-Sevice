@@ -1,7 +1,7 @@
-package TIcket;
+package ticket;
 
-import org.example.SetClassId;
-import org.example.Print;
+import org.example.ClassId;
+import org.example.Printable;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,7 +11,7 @@ import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 
-public class Ticket extends SetClassId implements Print{
+public class Ticket extends ClassId implements Printable {
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -26,7 +26,7 @@ public class Ticket extends SetClassId implements Print{
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
-    private TIcket.isPromo isPromo;
+    private ticket.PromotionAvaliabilities isPromo;
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
@@ -39,7 +39,7 @@ public class Ticket extends SetClassId implements Print{
         this.concertHall = "UNDEFINED";
         this.day = LocalDate.of(2000, 01,01);
         this.time = LocalTime.of(00,00,00);
-        this.isPromo = TIcket.isPromo.NOINFO;
+        this.isPromo = ticket.PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
@@ -59,7 +59,7 @@ public class Ticket extends SetClassId implements Print{
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = TIcket.isPromo.NOINFO;
+        this.isPromo = ticket.PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
@@ -73,7 +73,7 @@ public class Ticket extends SetClassId implements Print{
 
         this.day = LocalDate.now();
         this.time = LocalTime.now();
-        this.isPromo = TIcket.isPromo.NOINFO;
+        this.isPromo = ticket.PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.cost = cost;
@@ -96,10 +96,10 @@ public class Ticket extends SetClassId implements Print{
         this.day = day;
         this.time = time;
         if(isPromo){
-            this.isPromo = TIcket.isPromo.YES;
+            this.isPromo = ticket.PromotionAvaliabilities.YES;
 
         }else{
-            this.isPromo = TIcket.isPromo.NO;
+            this.isPromo = ticket.PromotionAvaliabilities.NO;
 
         }
         if(stadiumSector != 'A' && stadiumSector != 'B' && stadiumSector != 'C'){
@@ -150,7 +150,7 @@ public class Ticket extends SetClassId implements Print{
         return this.time;
     }
 
-    public isPromo getTicketIsPromo(){
+    public PromotionAvaliabilities getTicketIsPromo(){
         return this.isPromo;
     }
 

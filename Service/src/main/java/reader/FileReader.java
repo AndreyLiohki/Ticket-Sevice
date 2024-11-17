@@ -1,22 +1,19 @@
-package Reader;
+package reader;
 
-import Validator.Validator;
-import org.example.Print;
-import org.example.SetClassId;
+import validator.Validator;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import TIcket.ticketTypes;
-import TIcket.Ticket;
+import ticket.ticketTypes;
+import ticket.Ticket;
 import java.time.LocalDate;
 
-public class ReadFile extends SetClassId {
-    private static int classId;
-
-    public static List<Ticket> readTicketsFromFile(String filePath) {
+public class FileReader {
+    public List<Ticket> readTicketsFromFile(String filePath) {
         List<Ticket> tickets = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new java.io.FileReader(filePath))) {
@@ -43,15 +40,4 @@ public class ReadFile extends SetClassId {
         }
         return tickets;
     }
-
-    @Override
-    public void setId(int id){
-        classId = id;
-    }
-
-    @Override
-    public int getId(){
-        return classId;
-    }
-
 }

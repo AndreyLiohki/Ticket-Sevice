@@ -1,9 +1,9 @@
-package Senders;
+package senders;
 
-import TIcket.Ticket;
-import org.example.SetClassId;
+import ticket.Ticket;
+import org.example.ClassId;
 
-public class TelSender extends SetClassId implements TicketSender {
+public class TelephoneSender extends ClassId implements TicketSender {
     private static int classId;
 
     @Override

@@ -1,14 +1,14 @@
-package Users;
+package users;
 
-import TIcket.Ticket;
-import org.example.Print;
+import ticket.Ticket;
+import java.util.Arrays;
 
 public class Admin extends User {
-    private static String role = "ADMIN";
+    private static final String role = "ADMIN";
 
     //Used as a stub method
     public void checkTicket(Ticket ticket){
-        System.out.println(ticket.getTicketId() + " ticket is checked");
+        System.out.println(Arrays.toString(ticket.getTicketId()) + " ticket is checked");
     }
 
     @Override

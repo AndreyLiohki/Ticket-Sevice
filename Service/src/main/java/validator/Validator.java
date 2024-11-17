@@ -1,25 +1,24 @@
-package Validator;
+package validator;
 
-import TIcket.ticketTypes;
-import org.example.SetClassId;
+import ticket.ticketTypes;
+import org.example.ClassId;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Validator extends SetClassId {
-    private static int classId;
+public class Validator extends ClassId {
 
     private static Set<String> validValues = new HashSet<>();
-    static{
+
+    public Validator(){
         for(ticketTypes type: ticketTypes.values()){
             validValues.add(type.name());
         }
     }
 
-    public static boolean isValidTicket(LocalDate date, String typeOfTicket, BigDecimal cost){
+    public boolean isValidTicket(LocalDate date, String typeOfTicket, BigDecimal cost){
         if(date.isAfter(LocalDate.now())){
             return false;
         }

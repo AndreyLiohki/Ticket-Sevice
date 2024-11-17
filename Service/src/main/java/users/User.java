@@ -1,6 +1,4 @@
-package Users;
-
-import org.example.Print;
+package users;
 
 public abstract class User {
     abstract public void PrintRole();
