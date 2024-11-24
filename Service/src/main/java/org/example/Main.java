@@ -20,6 +20,6 @@ public class Main {
         for(Ticket item:tickets){
             item.print();
         }
-        
+
     }
 }
