@@ -18,9 +18,8 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version> <!-- Check for the latest version -->
+            <version>42.6.0</version>
         </dependency>
-        <!-- Добавьте другие зависимости здесь -->
     </dependencies>
 
 </project>
