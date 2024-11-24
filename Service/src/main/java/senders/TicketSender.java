@@ -1,6 +1,6 @@
 package senders;
 
-import ticket.Ticket;
+import model.ticket.Ticket;
 
 public interface TicketSender {
     void share(Ticket ticket);

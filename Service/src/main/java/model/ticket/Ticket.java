@@ -1,4 +1,4 @@
-package ticket;
+package model.ticket;
 
 import org.example.ClassId;
 import org.example.Printable;
@@ -6,10 +6,11 @@ import org.example.Printable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
+import id.generator.IdGenerator;
+import validator.IdValidator;
 
 public class Ticket extends ClassId implements Printable {
     private static int classID;
@@ -26,12 +27,13 @@ public class Ticket extends ClassId implements Printable {
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
-    private ticket.PromotionAvaliabilities isPromo;
+    private PromotionAvaliabilities isPromo;
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
 
     public Ticket(){
+        IdGenerator generator = new IdGenerator();
         this.ID = generateId();
         this.eventCode = 000;
         this.creationDate = LocalDate.now();
@@ -39,13 +41,14 @@ public class Ticket extends ClassId implements Printable {
         this.concertHall = "UNDEFINED";
         this.day = LocalDate.of(2000, 01,01);
         this.time = LocalTime.of(00,00,00);
-        this.isPromo = ticket.PromotionAvaliabilities.NOINFO;
+        this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
     };
 
     public Ticket(String concertHall, short eventCode, LocalDate day, LocalTime time){
+        IdGenerator generator = new IdGenerator();
         this.ID = generateId();
         if(eventCode<100 || eventCode>999){
             throw new IllegalArgumentException("Enter 3-digit code");
@@ -59,13 +62,14 @@ public class Ticket extends ClassId implements Printable {
         this.concertHall = concertHall;
         this.day = day;
         this.time = time;
-        this.isPromo = ticket.PromotionAvaliabilities.NOINFO;
+        this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
     }
 
     public Ticket(LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost){
+        IdGenerator generator = new IdGenerator();
         this.ID = generateId();
         this.eventCode = 0;
         this.creationDate = creationDate;
@@ -73,7 +77,7 @@ public class Ticket extends ClassId implements Printable {
 
         this.day = LocalDate.now();
         this.time = LocalTime.now();
-        this.isPromo = ticket.PromotionAvaliabilities.NOINFO;
+        this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.cost = cost;
@@ -81,7 +85,8 @@ public class Ticket extends ClassId implements Printable {
     }
 
     public Ticket(short eventCode, String concertHall, LocalDate day, LocalTime time,
-                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, int ticketType){
+                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, ticketTypes ticketType){
+        IdGenerator generator = new IdGenerator();
         this.ID = generateId();
         if(eventCode<100 || eventCode>999) {
             throw new IllegalArgumentException("Enter 3-digit code");
@@ -96,10 +101,10 @@ public class Ticket extends ClassId implements Printable {
         this.day = day;
         this.time = time;
         if(isPromo){
-            this.isPromo = ticket.PromotionAvaliabilities.YES;
+            this.isPromo = PromotionAvaliabilities.YES;
 
         }else{
-            this.isPromo = ticket.PromotionAvaliabilities.NO;
+            this.isPromo = PromotionAvaliabilities.NO;
 
         }
         if(stadiumSector != 'A' && stadiumSector != 'B' && stadiumSector != 'C'){
@@ -108,18 +113,26 @@ public class Ticket extends ClassId implements Printable {
         this.stadiumSector = stadiumSector;
         this.maxWeight = maxWeight;
         this.cost = cost;
-        if(ticketType == 0){
-            this.ticketType = ticketTypes.NOINFO;
-        }else if(ticketType == 1){
-            this.ticketType = ticketTypes.DAY;
-        }else if(ticketType == 2){
-            this.ticketType = ticketTypes.WEEK;
-        }else if(ticketType == 3){
-            this.ticketType = ticketTypes.MONTH;
-        }else if(ticketType == 4){
-            this.ticketType = ticketTypes.YEAR;
+        this.ticketType = ticketType;
+    }
 
+    public char[] generateId(){
+        String id = null;
+        char[] toReturn = new char[4];
+        IdGenerator generator = new IdGenerator();
+        IdValidator validator = new IdValidator();
+        do {
+            char[] idChars = generator.generate(ID_LENGTH, CHAR_POOL);
+
+            if (validator.checkUniqueness(idChars, generatedIDs)) {
+                id = new String(idChars);
+                toReturn = idChars;
+                generatedIDs.add(id);
+                break;
+            }
         }
+        while(id == null);
+        return toReturn;
     }
 
     public char[] getTicketId(){
@@ -176,38 +189,6 @@ public class Ticket extends ClassId implements Printable {
 
     public void setTicketTime(LocalTime time){
         this.time = time;
-    }
-
-    private char[] iDGenerator(){
-        char[] generatedID = new char[ID_LENGTH];
-        Random random = new Random();
-
-        for(int i = 0; i < ID_LENGTH; ++i) {
-            generatedID[i] = CHAR_POOL[random.nextInt(CHAR_POOL.length)];
-        }
-
-        return generatedID;
-    }
-
-    private boolean uniquenessChecker(char[] toCheck){
-        String idString = new String(toCheck);
-        return !generatedIDs.contains(idString);
-    }
-
-    private char[] generateId(){
-        String id = "";
-        char[] toReturn = new char[4];
-        do {
-            char[] idChars = iDGenerator();
-
-            if (uniquenessChecker(idChars)) {
-                id = new String(idChars);
-                toReturn = idChars;
-                generatedIDs.add(id);
-            }
-        }
-        while(id == null);
-        return toReturn;
     }
 
     @Override

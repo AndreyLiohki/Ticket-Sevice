@@ -1,6 +1,6 @@
 package senders;
 
-import ticket.Ticket;
+import model.ticket.Ticket;
 import org.example.ClassId;
 
 public class EmailSender extends ClassId implements TicketSender {

@@ -1,6 +1,6 @@
 package validator;
 
-import ticket.ticketTypes;
+import model.ticket.ticketTypes;
 import org.example.ClassId;
 
 import java.math.BigDecimal;

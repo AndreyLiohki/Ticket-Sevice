@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import ticket.ticketTypes;
-import ticket.Ticket;
+import model.ticket.ticketTypes;
+import model.ticket.Ticket;
 import java.time.LocalDate;
 
 public class FileReader {

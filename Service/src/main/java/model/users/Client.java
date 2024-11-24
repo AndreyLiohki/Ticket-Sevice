@@ -1,6 +1,6 @@
-package users;
+package model.users;
 
-import ticket.Ticket;
+import model.ticket.Ticket;
 import java.util.Arrays;
 
 public class Client extends User {
@@ -12,7 +12,7 @@ public class Client extends User {
     }
 
     @Override
-    public void PrintRole(){
+    public void printRole(){
         System.out.println(role);
     }
 
