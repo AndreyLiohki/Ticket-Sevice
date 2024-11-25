@@ -31,6 +31,7 @@ public class Ticket extends ClassId implements Printable {
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
+    private int userId;
 
     public Ticket(){
         IdGenerator generator = new IdGenerator();
@@ -44,7 +45,8 @@ public class Ticket extends ClassId implements Printable {
         this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
-        this.ticketType = ticketTypes.NOINFO;
+        this.ticketType = ticketTypes.MONTH;
+        this.userId = 1;
     };
 
     public Ticket(String concertHall, short eventCode, LocalDate day, LocalTime time){
@@ -66,6 +68,21 @@ public class Ticket extends ClassId implements Printable {
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
+        this.userId = 0;
+    }
+
+    public Ticket(char[] id, int userId, ticketTypes ticketType, LocalDate creationDate){
+        this.ID = id;
+        this.eventCode = 0;
+        this.creationDate = creationDate;
+        this.creationTime = LocalTime.now();
+        this.userId = userId;
+        this.day = LocalDate.now();
+        this.time = LocalTime.now();
+        this.isPromo = PromotionAvaliabilities.NOINFO;
+        this.stadiumSector = '\u0000';
+        this.maxWeight = 0;
+        this.ticketType = ticketType;
     }
 
     public Ticket(LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost){
@@ -85,7 +102,7 @@ public class Ticket extends ClassId implements Printable {
     }
 
     public Ticket(short eventCode, String concertHall, LocalDate day, LocalTime time,
-                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, ticketTypes ticketType){
+                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, ticketTypes ticketType, int userId){
         IdGenerator generator = new IdGenerator();
         this.ID = generateId();
         if(eventCode<100 || eventCode>999) {
@@ -114,6 +131,7 @@ public class Ticket extends ClassId implements Printable {
         this.maxWeight = maxWeight;
         this.cost = cost;
         this.ticketType = ticketType;
+        this.userId = userId;
     }
 
     public char[] generateId(){
@@ -178,6 +196,10 @@ public class Ticket extends ClassId implements Printable {
     public BigDecimal getTicketCost(){
         return this.cost;
     }
+
+    public int getTicketUserId() { return userId; }
+
+    public ticketTypes getTicketTicketType() { return ticketType; }
 
     public void setStadiumSector(char sector){
         this.stadiumSector = sector;
