@@ -15,7 +15,7 @@ public class TicketDao {
         String sql = "INSERT INTO \"Ticket\" (id, user_id, ticket_type, creation_date) VALUES (?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, new String(ticket.getTicketId()));
+            pstmt.setInt(1, ticket.getTicketId());
             pstmt.setInt(2, ticket.getTicketUserId());
             pstmt.setObject(3, ticket.getTicketTicketType().name(), Types.OTHER);
             pstmt.setDate(4, Date.valueOf(ticket.getTicketCreationDate()));
@@ -31,7 +31,7 @@ public class TicketDao {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Ticket(
-                        rs.getString("id").toCharArray(),
+                        rs.getInt("id"),
                         rs.getInt("user_id"),
                         ticketTypes.valueOf(rs.getString("ticket_type")),
                         rs.getDate("creation_date").toLocalDate()
@@ -50,7 +50,7 @@ public class TicketDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 tickets.add(new Ticket(
-                        rs.getString("id").toCharArray(),
+                        rs.getInt("id"),
                         rs.getInt("user_id"),
                         ticketTypes.valueOf(rs.getString("ticket_type")),
                         rs.getDate("creation_date").toLocalDate()
@@ -60,12 +60,12 @@ public class TicketDao {
         return tickets;
     }
 
-    public void updateTicketType(char[] id, ticketTypes newType) throws SQLException {
+    public void updateTicketType(int id, ticketTypes newType) throws SQLException {
         String sql = "UPDATE \"Ticket\" SET ticket_type = ? WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setObject(1, newType.name(),  Types.OTHER);
-            pstmt.setString(2, new String(id));
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
         }
     }

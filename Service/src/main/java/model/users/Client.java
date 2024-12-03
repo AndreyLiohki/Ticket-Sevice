@@ -29,7 +29,7 @@ public class Client extends User {
     }
 
     public void getTicket(Ticket ticket){
-        System.out.println(Arrays.toString(ticket.getTicketId()) + " Ticket has been got");
+        System.out.println((ticket.getTicketId()) + " Ticket has been got");
     }
 
     @Override

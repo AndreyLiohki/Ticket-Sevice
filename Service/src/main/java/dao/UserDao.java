@@ -3,7 +3,7 @@ package dao;
 import model.users.Client;
 import java.sql.*;
 
-public class UserDAO {
+public class UserDao {
     private final String url = "jdbc:postgresql://localhost:5432/my_ticket_service_db";
     private final String user = "postgres";
     private final String password = "1111";

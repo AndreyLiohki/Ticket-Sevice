@@ -8,7 +8,7 @@ public class Admin extends User {
 
     //Used as a stub method
     public void checkTicket(Ticket ticket){
-        System.out.println(Arrays.toString(ticket.getTicketId()) + " ticket is checked");
+        System.out.println(ticket.getTicketId() + " ticket is checked");
     }
 
     @Override

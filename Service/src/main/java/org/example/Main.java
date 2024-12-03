@@ -1,12 +1,12 @@
 package org.example;
 
-import dao.UserDAO;
+import dao.DatabaseManager;
+import dao.UserDao;
 import model.ticket.Ticket;
 import model.ticket.ticketTypes;
 import model.users.Client;
 import reader.FileReader;
 import dao.TicketDao;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,10 +14,12 @@ import java.util.List;
 public class Main {
     private static final String filePath = "input.txt";
     public static void main(String[] args) throws SQLException {
+        DatabaseManager data = new DatabaseManager();
+        data.createDatabase();
         Ticket ticket = new Ticket();
         ticket.print();
 
-        Client client = new Client("Andrey", 1, LocalDate.now());
+        Client client = new Client("Andrey", 2, LocalDate.now());
         FileReader reader = new FileReader();
 
         List<Ticket> tickets  = reader.readTicketsFromFile(filePath);
@@ -25,7 +27,7 @@ public class Main {
             item.print();
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDao userDAO = new UserDao();
         userDAO.saveUser(client);
         System.out.println("Ticket saved successfully.");
 
@@ -34,9 +36,9 @@ public class Main {
         System.out.println("Ticket saved successfully.");
 
         tickets = ticketDao.fetchTicketsByUserId(1);
-        for(Ticket item:tickets){
-            item.print();
-        }
+        //for(Ticket item:tickets){
+        //    item.print();
+        //}
 
         ticketTypes type = ticketTypes.DAY;
         ticketDao.updateTicketType(ticket.getTicketId(), type);
@@ -45,10 +47,6 @@ public class Main {
         for(Ticket item:tickets){
             item.print();
         }
-        System.out.println();
-        System.out.println();
-        char[] id = {'M', 'F', 'O', 'C'};
-        Ticket t1 = ticketDao.fetchTicketById(id);
-        t1.print();
+
     }
 }

@@ -6,6 +6,7 @@ import org.example.Printable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,7 @@ public class Ticket extends ClassId implements Printable {
     private static Set<String> generatedIDs = new HashSet<>();
 
     private char[] ID;
+    private int id;
     private short eventCode;
     private LocalDate creationDate;
     private LocalTime creationTime;
@@ -36,6 +38,8 @@ public class Ticket extends ClassId implements Printable {
     public Ticket(){
         IdGenerator generator = new IdGenerator();
         this.ID = generateId();
+        Random random = new Random();
+        this.id = random.nextInt();
         this.eventCode = 000;
         this.creationDate = LocalDate.now();
         this.creationTime = LocalTime.now();
@@ -68,11 +72,11 @@ public class Ticket extends ClassId implements Printable {
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
-        this.userId = 0;
+        this.userId = 1;
     }
 
-    public Ticket(char[] id, int userId, ticketTypes ticketType, LocalDate creationDate){
-        this.ID = id;
+    public Ticket(int id, int userId, ticketTypes ticketType, LocalDate creationDate){
+        this.id = id;
         this.eventCode = 0;
         this.creationDate = creationDate;
         this.creationTime = LocalTime.now();
@@ -153,8 +157,11 @@ public class Ticket extends ClassId implements Printable {
         return toReturn;
     }
 
-    public char[] getTicketId(){
+    public char[] getCharTicketId(){
         return this.ID;
+    }
+    public int getTicketId(){
+        return this.id;
     }
 
     public short getTicketEvetCode(){
@@ -233,7 +240,7 @@ public class Ticket extends ClassId implements Printable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String eventTime = time.format(formatter);
         String timeOfCreation = creationTime.format(formatter);
-        return "Ticket{" + "ticketId = " + String.valueOf(ID) +
+        return "Ticket{" + "ticketId = " + id +
                 ", event code = " + eventCode + ", creation date = " + creationDate +
                 ", creation time = " + timeOfCreation + ", concert hall = " + concertHall +
                 ", day = " + day + ", time = " + eventTime + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
