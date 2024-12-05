@@ -6,7 +6,6 @@ import java.util.Arrays;
 public class Admin extends User {
     private static final String role = "ADMIN";
 
-    //Used as a stub method
     public void checkTicket(Ticket ticket){
         System.out.println(ticket.getTicketId() + " ticket is checked");
     }

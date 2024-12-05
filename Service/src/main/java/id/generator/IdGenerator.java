@@ -17,5 +17,4 @@ public class IdGenerator {
     public char[] generate(int ID_LENGTH, final char[] CHAR_POOL){
         return  iDGenerator(ID_LENGTH, CHAR_POOL);
     }
-
 }
