@@ -1,16 +1,19 @@
 package dao;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Repository
+import javax.sql.DataSource;
+
+@Component
 public class HibernateUtil {
-    private static final  SessionFactory sessionFactory = buildSessionFactory();
-    private static SessionFactory buildSessionFactory() {
-        return new Configuration().configure().buildSessionFactory();
+    private final SessionFactory sessionFactory;
+    @Autowired
+    public HibernateUtil(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
     }
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }

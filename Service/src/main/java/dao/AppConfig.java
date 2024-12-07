@@ -1,48 +1,71 @@
 package dao;
 
+import com.mchange.v2.c3p0.DriverManagerDataSource;
+import model.ticket.Ticket;
+import model.users.Client;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.context.annotation.Scope;
 import javax.sql.DataSource;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
-@EnableTransactionManagement
 @ComponentScan(basePackages = "dao")
 public class AppConfig {
 
     @Bean
-    public DataSource dataSource() {
+    @Scope("singleton")
+    public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/;DB_CLOSE_DELAY=-1");
-        dataSource.setUsername("postgres");
+        dataSource.setDriverClass("org.postgresql.Driver");
+        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/my_ticket_service_db");
+        dataSource.setUser("postgres");
         dataSource.setPassword("1111");
         return dataSource;
+
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("model.ticket", "model.Client");
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.put("hibernate.show_sql", "true");
-        sessionFactory.setHibernateProperties(hibernateProperties);
-        return sessionFactory;
+    @Scope("singleton")
+    public SessionFactory sessionFactory() {
+        Map<String, String> settings = new HashMap<>();
+        settings.put(Environment.DRIVER, "org.postgresql.Driver");
+        settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/my_ticket_service_db");
+        settings.put(Environment.USER, "postgres");
+        settings.put(Environment.PASS, "1111");
+        settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+        settings.put(Environment.HBM2DDL_AUTO, "update");
+        settings.put(Environment.SHOW_SQL, "true");
+
+        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(settings).build();
+        return new org.hibernate.cfg.Configuration()
+                .addAnnotatedClass(Ticket.class)
+                .addAnnotatedClass(Client.class)
+                .buildSessionFactory(serviceRegistry);
     }
 
     @Bean
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
+    @Scope("singleton")
+    public HibernateUtil hibernateUtil() {
+        return new HibernateUtil(sessionFactory());
     }
+
+    @Bean
+    @Scope("singleton")
+    public UserDao userDao(){
+        return new UserDao(hibernateUtil());
+    }
+
+    @Scope("singleton")
+    public TicketDao ticketDao(){
+        return new TicketDao(hibernateUtil());
+    }
+
 }

@@ -1,73 +1,74 @@
 package org.example;
 
+import dao.AppConfig;
 import dao.DatabaseManager;
+import dao.TicketDao;
 import dao.UserDao;
 import model.ticket.Ticket;
 import model.ticket.ticketTypes;
 import model.users.Client;
-import dao.TicketDao;
-import java.sql.SQLException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
-    private static final String filePath = "input.txt";
     public static void main(String[] args) {
-        DatabaseManager database = new DatabaseManager();
-        database.createDatabase();
-        UserDao clientDao = new UserDao();
-        TicketDao ticketDao = new TicketDao();
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        DatabaseManager databaseManager = context.getBean(DatabaseManager.class);
 
-        Client newClient = new Client("John Doe", LocalDate.now());
-        clientDao.saveClient(newClient);
-        System.out.println("Client saved: " + newClient);
-        System.out.println();
+        Client client = new Client("Andrey", LocalDate.now());
+        TicketDao daoT = context.getBean(TicketDao.class);
+        UserDao daoU = context.getBean(UserDao.class);
 
-        Client fetchedClient = clientDao.getClientById(newClient.getClientId());
+        // Сохранение пользователя
+        daoU.saveUser(client);
+        System.out.println("User saved: " + client);
+
+        // Получение пользователя
+        Client fetchedClient = daoU.fetchUserById(client.getClientId());
         System.out.println("Fetched client: " + fetchedClient);
         System.out.println();
 
-        Ticket newTicket = new Ticket(7, newClient.getClientId(), ticketTypes.MONTH, LocalDate.now(), newClient);
-        ticketDao.saveTicket(newTicket);
+        // Сохранение билета
+        Ticket newTicket = new Ticket(2, client.getClientId(), ticketTypes.MONTH, LocalDate.now(), client);
+        daoT.saveTicket(newTicket);
         System.out.println("Ticket saved: " + newTicket);
         System.out.println();
 
-
-        Ticket fetchedTicket = ticketDao.getTicketById(5);
+        // Получение билета по ID
+        Ticket fetchedTicket = daoT.fetchTicketById(5L);
         System.out.println("Fetched ticket: " + fetchedTicket);
         System.out.println();
 
-        List<Ticket> userTickets = ticketDao.getTicketsByUserId(newClient.getClientId());
+        // Получение всех билетов клиента
+        List<Ticket> userTickets = daoT.fetchTicketsByClientId(client.getClientId());
         System.out.println("Tickets for user: " + userTickets);
         System.out.println();
 
-        int a = newTicket.getTicketId();
-        ticketDao.updateTicketType(newTicket.getTicketId(), ticketTypes.DAY);
-        Ticket tick = ticketDao.getTicketById(a);
-        System.out.println(tick.getTicketTicketType());
+        // Изменение типа билета
+        long ticketId = newTicket.getTicketId();
+        daoT.updateTicketType(ticketId, ticketTypes.DAY);
+        Ticket updatedTicket = daoT.fetchTicketById(ticketId);
+        System.out.println("Updated ticket type: " + updatedTicket.getTicketTicketType());
         System.out.println();
 
-        clientDao.deleteClient(newClient.getClientId());
+        List<Ticket> arr = daoT.fetchTicketsByClientId(client.getClientId());
+        for(int i = 0; i < arr.size(); ++i){
+            System.out.println(arr.get(i));
+        }
+        daoU.deleteUser(client.getClientId());
         System.out.println("Client and associated tickets deleted.");
         System.out.println();
 
-        userTickets = ticketDao.getTicketsByUserId(1);
-        if (userTickets.isEmpty()) {
-            System.out.println("No tickets found for deleted client.");
-            System.out.println();
+        // Проверка билетов после удаления клиента
+        userTickets = daoT.fetchTicketsByClientId(client.getClientId());
+        System.out.println("Tickets after deletion: " + userTickets);
 
-        } else {
-            System.out.println("Tickets still exist for deleted client: " + userTickets);
-        }
-
-        fetchedClient = clientDao.getClientById(newClient.getClientId());
-        if (fetchedClient == null) {
-            System.out.println("Client successfully deleted.");
-        } else {
-            System.out.println("Client still exists: " + fetchedClient);
-        }
+        // Проверка существования клиента после удаления
+        fetchedClient = daoU.fetchUserById(client.getClientId());
+        System.out.println("Client status after deletion: " + fetchedClient);
         System.out.println();
-
-
     }
 }

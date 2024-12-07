@@ -3,7 +3,6 @@ package model.users;
 import model.ticket.Ticket;
 import java.time.LocalDate;
 import java.util.List;
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +12,7 @@ public class Client extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int clientId;
+    private long clientId;
 
     @Column(name = "Name", nullable = false, length = 100)
     private String name;
@@ -37,7 +36,7 @@ public class Client extends User {
     public String getName() {
         return name;
     }
-    public int getClientId() {
+    public long getClientId() {
         return clientId;
     }
     public LocalDate getCreationDate() {

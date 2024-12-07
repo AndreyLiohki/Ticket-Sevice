@@ -3,7 +3,6 @@ package model.ticket;
 import model.users.Client;
 import org.example.ClassId;
 import org.example.Printable;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -25,7 +24,7 @@ public class Ticket extends ClassId implements Printable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -39,7 +38,7 @@ public class Ticket extends ClassId implements Printable {
     private LocalDate creationDate;
 
 
-    private int userId;
+    private long userId;
     private short eventCode;
     private LocalTime creationTime;
     private String concertHall;
@@ -65,7 +64,7 @@ public class Ticket extends ClassId implements Printable {
         this.cost = null;
         this.userId = 1;
     };
-    public Ticket(int id, int userId, ticketTypes ticketType, LocalDate creationDate, Client client){
+    public Ticket(long id, long userId, ticketTypes ticketType, LocalDate creationDate, Client client){
 
         this.id = id;
         this.eventCode = 2;
@@ -114,7 +113,7 @@ public class Ticket extends ClassId implements Printable {
         while(id == null);
         return toReturn;
     }
-    public int getTicketId(){
+    public long getTicketId(){
         return this.id;
     }
     public short getTicketEvetCode(){
@@ -147,7 +146,7 @@ public class Ticket extends ClassId implements Printable {
     public BigDecimal getTicketCost(){
         return this.cost;
     }
-    public int getTicketUserId() { return userId; }
+    public long getTicketUserId() { return userId; }
     public ticketTypes getTicketTicketType() { return ticketType; }
     public void setStadiumSector(char sector){
         this.stadiumSector = sector;
