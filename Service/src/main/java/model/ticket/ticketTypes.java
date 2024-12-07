@@ -5,5 +5,5 @@ public enum ticketTypes {
     WEEK,
     MONTH,
     YEAR,
-    NOINFO;
+    //NOINFO
 }
