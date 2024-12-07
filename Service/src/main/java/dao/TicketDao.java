@@ -4,9 +4,13 @@ import model.ticket.Ticket;
 import model.ticket.ticketTypes;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
+@Repository
 public class TicketDao {
+    @Transactional
     public void saveTicket(Ticket ticket){
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -15,12 +19,14 @@ public class TicketDao {
         transaction.commit();
         session.close();
     }
+    @Transactional(readOnly = true)
     public Ticket getTicketById(int id){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Ticket ticket = session.get(Ticket.class, id);
         session.close();
         return ticket;
     }
+    @Transactional(readOnly = true)
     public List<Ticket> getTicketsByUserId(int userId){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -31,6 +37,7 @@ public class TicketDao {
         session.close();
         return tickets;
     }
+    @Transactional
     public void updateTicketType(int ticketId, ticketTypes newTicketType) {
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

@@ -5,19 +5,14 @@ import dao.UserDao;
 import model.ticket.Ticket;
 import model.ticket.ticketTypes;
 import model.users.Client;
-import model.users.User;
-import org.hibernate.dialect.Database;
-import reader.FileReader;
 import dao.TicketDao;
-
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
     private static final String filePath = "input.txt";
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         DatabaseManager database = new DatabaseManager();
         database.createDatabase();
         UserDao clientDao = new UserDao();

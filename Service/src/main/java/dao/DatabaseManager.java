@@ -1,19 +1,16 @@
 package dao;
 
-import model.ticket.Ticket;
-import model.users.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@Component
 public class DatabaseManager {
+    @Autowired
     private SessionFactory sessionFactory;
     private final String url = "jdbc:postgresql://localhost:5432/";
     private final String user = "postgres";
