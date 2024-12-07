@@ -1,5 +1,6 @@
 package model.ticket;
 
+import model.users.Client;
 import org.example.ClassId;
 import org.example.Printable;
 
@@ -11,19 +12,36 @@ import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import id.generator.IdGenerator;
 import validator.IdValidator;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Ticket")
 public class Ticket extends ClassId implements Printable {
     private static int classID;
     private static final int ID_LENGTH = 4;
     private static final char[] CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
     private static Set<String> generatedIDs = new HashSet<>();
 
-    private char[] ID;
-    private short eventCode;
-    private LocalDate creationDate;
-    private LocalTime creationTime;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private Client client;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ticket_type", nullable = false)
     private ticketTypes ticketType;
+
+    @Column(name = "creation_date", nullable = false)
+    private LocalDate creationDate;
+
+
+    private int userId;
+    private short eventCode;
+    private LocalTime creationTime;
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
@@ -33,8 +51,8 @@ public class Ticket extends ClassId implements Printable {
     private BigDecimal cost;
 
     public Ticket(){
-        IdGenerator generator = new IdGenerator();
-        this.ID = generateId();
+        this.id = 0;
+        this.ticketType = ticketTypes.MONTH;
         this.eventCode = 000;
         this.creationDate = LocalDate.now();
         this.creationTime = LocalTime.now();
@@ -44,78 +62,40 @@ public class Ticket extends ClassId implements Printable {
         this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
-        this.ticketType = ticketTypes.NOINFO;
+        this.cost = null;
+        this.userId = 1;
     };
+    public Ticket(int id, int userId, ticketTypes ticketType, LocalDate creationDate, Client client){
 
-    public Ticket(String concertHall, short eventCode, LocalDate day, LocalTime time){
-        IdGenerator generator = new IdGenerator();
-        this.ID = generateId();
-        if(eventCode<100 || eventCode>999){
-            throw new IllegalArgumentException("Enter 3-digit code");
-        }
-        this.eventCode = eventCode;
-        this.creationDate = LocalDate.now();
+        this.id = id;
+        this.eventCode = 2;
+        this.client = client;
+        this.creationDate = creationDate;
         this.creationTime = LocalTime.now();
-        if(concertHall.length()>10){
-            throw new IllegalArgumentException("The name of the concert hall should not exceed 10 characters");
-        }
-        this.concertHall = concertHall;
-        this.day = day;
-        this.time = time;
+        this.userId = userId;
+        this.day = LocalDate.now();
+        this.time = LocalTime.now();
         this.isPromo = PromotionAvaliabilities.NOINFO;
-        this.stadiumSector = '\u0000';
+        this.stadiumSector = 'C';
         this.maxWeight = 0;
-        this.ticketType = ticketTypes.NOINFO;
+        this.ticketType = ticketType;
     }
+    public Ticket(LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost) {
 
-    public Ticket(LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost){
-        IdGenerator generator = new IdGenerator();
-        this.ID = generateId();
-        this.eventCode = 0;
+        this.id = id;
+        this.eventCode = 2;
+        this.client = client;
         this.creationDate = creationDate;
         this.creationTime = creationTime;
-
+        this.userId = userId;
         this.day = LocalDate.now();
         this.time = LocalTime.now();
         this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
-        this.cost = cost;
         this.ticketType = ticketType;
-    }
-
-    public Ticket(short eventCode, String concertHall, LocalDate day, LocalTime time,
-                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, ticketTypes ticketType){
-        IdGenerator generator = new IdGenerator();
-        this.ID = generateId();
-        if(eventCode<100 || eventCode>999) {
-            throw new IllegalArgumentException("Enter 3-digit code");
-        }
-        this.eventCode = eventCode;
-        this.creationDate = LocalDate.now();
-        this.creationTime = LocalTime.now();
-        if(concertHall.length()>10){
-            throw new IllegalArgumentException("The name of the concert hall should not exceed 10 characters");
-        }
-        this.concertHall = concertHall;
-        this.day = day;
-        this.time = time;
-        if(isPromo){
-            this.isPromo = PromotionAvaliabilities.YES;
-
-        }else{
-            this.isPromo = PromotionAvaliabilities.NO;
-
-        }
-        if(stadiumSector != 'A' && stadiumSector != 'B' && stadiumSector != 'C'){
-            throw new IllegalArgumentException("The name of sectors must be A, B or C");
-        }
-        this.stadiumSector = stadiumSector;
-        this.maxWeight = maxWeight;
         this.cost = cost;
-        this.ticketType = ticketType;
     }
-
     public char[] generateId(){
         String id = null;
         char[] toReturn = new char[4];
@@ -134,61 +114,55 @@ public class Ticket extends ClassId implements Printable {
         while(id == null);
         return toReturn;
     }
-
-    public char[] getTicketId(){
-        return this.ID;
+    public int getTicketId(){
+        return this.id;
     }
-
     public short getTicketEvetCode(){
         return this.eventCode;
     }
-
     public LocalDate getTicketCreationDate(){
         return this.creationDate;
     }
-
     public LocalTime getTicketCreationTime(){
         return this.creationTime;
     }
-
     public String getTicketConcertHall(){
         return this.concertHall;
     }
-
     public LocalDate getTicketDay(){
         return this.day;
     }
-
     public LocalTime getTicketTime(){
         return this.time;
     }
-
     public PromotionAvaliabilities getTicketIsPromo(){
         return this.isPromo;
     }
-
     public char getTicketStadiumSector(){
         return this.stadiumSector;
     }
-
     public double getTicketMaxWeight(){
         return this.maxWeight;
     }
-
     public BigDecimal getTicketCost(){
         return this.cost;
     }
-
+    public int getTicketUserId() { return userId; }
+    public ticketTypes getTicketTicketType() { return ticketType; }
     public void setStadiumSector(char sector){
         this.stadiumSector = sector;
     }
-
     public void setTicketDay(LocalDate date){
         this.day = date;
     }
-
     public void setTicketTime(LocalTime time){
         this.time = time;
+    }
+    public void setTicketTicketType(ticketTypes newType) {
+        this.ticketType = newType;
+    }
+    public void setTicketType(ticketTypes newTicketType) {
+        this.ticketType = newTicketType;
     }
 
     @Override
@@ -211,7 +185,7 @@ public class Ticket extends ClassId implements Printable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String eventTime = time.format(formatter);
         String timeOfCreation = creationTime.format(formatter);
-        return "Ticket{" + "ticketId = " + String.valueOf(ID) +
+        return "Ticket{" + "ticketId = " + id +
                 ", event code = " + eventCode + ", creation date = " + creationDate +
                 ", creation time = " + timeOfCreation + ", concert hall = " + concertHall +
                 ", day = " + day + ", time = " + eventTime + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
@@ -231,4 +205,6 @@ public class Ticket extends ClassId implements Printable {
     public int hashCode(){
         return this.hashCode();
     }
+
+
 }
