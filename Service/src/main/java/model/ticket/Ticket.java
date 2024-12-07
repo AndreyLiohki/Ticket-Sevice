@@ -6,6 +6,7 @@ import org.example.Printable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,7 @@ public class Ticket extends ClassId implements Printable {
     private static Set<String> generatedIDs = new HashSet<>();
 
     private char[] ID;
+    private int id;
     private short eventCode;
     private LocalDate creationDate;
     private LocalTime creationTime;
@@ -31,10 +33,13 @@ public class Ticket extends ClassId implements Printable {
     private char stadiumSector;
     private double maxWeight;
     private BigDecimal cost;
+    private int userId;
 
     public Ticket(){
         IdGenerator generator = new IdGenerator();
         this.ID = generateId();
+        Random random = new Random();
+        this.id = random.nextInt();
         this.eventCode = 000;
         this.creationDate = LocalDate.now();
         this.creationTime = LocalTime.now();
@@ -44,7 +49,8 @@ public class Ticket extends ClassId implements Printable {
         this.isPromo = PromotionAvaliabilities.NOINFO;
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
-        this.ticketType = ticketTypes.NOINFO;
+        this.ticketType = ticketTypes.MONTH;
+        this.userId = 1;
     };
 
     public Ticket(String concertHall, short eventCode, LocalDate day, LocalTime time){
@@ -66,6 +72,21 @@ public class Ticket extends ClassId implements Printable {
         this.stadiumSector = '\u0000';
         this.maxWeight = 0;
         this.ticketType = ticketTypes.NOINFO;
+        this.userId = 1;
+    }
+
+    public Ticket(int id, int userId, ticketTypes ticketType, LocalDate creationDate){
+        this.id = id;
+        this.eventCode = 0;
+        this.creationDate = creationDate;
+        this.creationTime = LocalTime.now();
+        this.userId = userId;
+        this.day = LocalDate.now();
+        this.time = LocalTime.now();
+        this.isPromo = PromotionAvaliabilities.NOINFO;
+        this.stadiumSector = '\u0000';
+        this.maxWeight = 0;
+        this.ticketType = ticketType;
     }
 
     public Ticket(LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost){
@@ -85,7 +106,7 @@ public class Ticket extends ClassId implements Printable {
     }
 
     public Ticket(short eventCode, String concertHall, LocalDate day, LocalTime time,
-                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, ticketTypes ticketType){
+                  boolean isPromo, char stadiumSector, double maxWeight, BigDecimal cost, ticketTypes ticketType, int userId){
         IdGenerator generator = new IdGenerator();
         this.ID = generateId();
         if(eventCode<100 || eventCode>999) {
@@ -114,6 +135,7 @@ public class Ticket extends ClassId implements Printable {
         this.maxWeight = maxWeight;
         this.cost = cost;
         this.ticketType = ticketType;
+        this.userId = userId;
     }
 
     public char[] generateId(){
@@ -135,8 +157,11 @@ public class Ticket extends ClassId implements Printable {
         return toReturn;
     }
 
-    public char[] getTicketId(){
+    public char[] getCharTicketId(){
         return this.ID;
+    }
+    public int getTicketId(){
+        return this.id;
     }
 
     public short getTicketEvetCode(){
@@ -179,6 +204,10 @@ public class Ticket extends ClassId implements Printable {
         return this.cost;
     }
 
+    public int getTicketUserId() { return userId; }
+
+    public ticketTypes getTicketTicketType() { return ticketType; }
+
     public void setStadiumSector(char sector){
         this.stadiumSector = sector;
     }
@@ -211,7 +240,7 @@ public class Ticket extends ClassId implements Printable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String eventTime = time.format(formatter);
         String timeOfCreation = creationTime.format(formatter);
-        return "Ticket{" + "ticketId = " + String.valueOf(ID) +
+        return "Ticket{" + "ticketId = " + id +
                 ", event code = " + eventCode + ", creation date = " + creationDate +
                 ", creation time = " + timeOfCreation + ", concert hall = " + concertHall +
                 ", day = " + day + ", time = " + eventTime + ", is promo = " + isPromo + ", stadium sector = " + stadiumSector +
