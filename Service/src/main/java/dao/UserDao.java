@@ -2,7 +2,6 @@ package dao;
 
 import model.ticket.Ticket;
 import model.users.Client;
-import model.users.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

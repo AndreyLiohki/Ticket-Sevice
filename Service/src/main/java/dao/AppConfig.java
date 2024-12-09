@@ -51,21 +51,4 @@ public class AppConfig {
                 .buildSessionFactory(serviceRegistry);
     }
 
-    @Bean
-    @Scope("singleton")
-    public HibernateUtil hibernateUtil() {
-        return new HibernateUtil(sessionFactory());
-    }
-
-    @Bean
-    @Scope("singleton")
-    public UserDao userDao(){
-        return new UserDao(hibernateUtil());
-    }
-
-    @Scope("singleton")
-    public TicketDao ticketDao(){
-        return new TicketDao(hibernateUtil());
-    }
-
 }
