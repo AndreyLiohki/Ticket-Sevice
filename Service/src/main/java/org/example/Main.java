@@ -55,9 +55,12 @@ public class Main {
         System.out.println();
 
         List<Ticket> arr = daoT.fetchTicketsByClientId(client.getClientId());
-        for(int i = 0; i < arr.size(); ++i){
+        for (int i = 0; i < arr.size(); ++i) {
             System.out.println(arr.get(i));
         }
+
+        Client checkUpdate = daoU.fetchUserById(client.getClientId());
+
         daoU.deleteUser(client.getClientId());
         System.out.println("Client and associated tickets deleted.");
         System.out.println();
@@ -70,5 +73,12 @@ public class Main {
         fetchedClient = daoU.fetchUserById(client.getClientId());
         System.out.println("Client status after deletion: " + fetchedClient);
         System.out.println();
+
+        Client testClient = new Client("Bro", LocalDate.now());
+        daoU.saveUser(testClient);
+
+        Ticket newTicket_1 = new Ticket(9, testClient.getClientId(), ticketTypes.MONTH, LocalDate.now(), testClient);
+        daoU.updateUserAndCreateTicket(testClient, newTicket_1);
     }
+
 }

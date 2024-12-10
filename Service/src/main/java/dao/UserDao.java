@@ -1,65 +1,61 @@
 package dao;
 
 import model.ticket.Ticket;
+import model.users.Activation;
 import model.users.Client;
-import model.users.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserDao {
     private final SessionFactory sessionFactory;
 
+    @Value("${app.updateUserAndCreateTicket.enabled}")
+    private boolean updateUserAndCreateTicketEnabled;
+
     @Autowired
-    public UserDao(HibernateUtil hibernateUtil) {
-        this.sessionFactory = hibernateUtil.getSessionFactory();
+    public UserDao(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     public void saveUser(Client client) {
-        Transaction transaction = null;
-        Session session = sessionFactory.openSession();
-        transaction = session.beginTransaction();
-        session.save(client);
-        transaction.commit();
-        session.close();
+        sessionFactory.getCurrentSession().save(client);
     }
 
     public Client fetchUserById(long id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.get(Client.class, id);
-        }
+        return sessionFactory.getCurrentSession().get(Client.class, id);
     }
 
     public void deleteUser(long id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            Client user = session.get(Client.class, id);
-            if (user != null) {
-                List<Ticket> tickets = user.getTickets();
-                for (Ticket ticket : tickets) {
-                    Ticket ticketToDelete = session.get(Ticket.class, ticket.getTicketId());
-                    if (ticketToDelete != null) {
-                        session.delete(ticketToDelete);
-                    } else {
-                        System.out.println("Ticket with ID " + ticket.getTicketId() + " not found, cannot delete.");
-                    }
+        Client user = sessionFactory.getCurrentSession().get(Client.class, id);
+        if (user != null) {
+            List<Ticket> tickets = user.getTickets();
+            for (Ticket ticket : tickets) {
+                Ticket ticketToDelete = sessionFactory.getCurrentSession().get(Ticket.class, ticket.getTicketId());
+                if (ticketToDelete != null) {
+                    sessionFactory.getCurrentSession().delete(ticketToDelete);
+                } else {
+                    System.out.println("Ticket with ID " + ticket.getTicketId() + " not found, cannot delete.");
                 }
-                session.delete(user);
-            } else {
-                System.out.println("Client with ID " + id + " not found.");
             }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            System.err.println("Error deleting user: " + e.getMessage());
-        } finally {
-            session.close();
+            sessionFactory.getCurrentSession().delete(user);
+        } else {
+            System.out.println("Client with ID " + id + " not found.");
         }
+    }
+    public void updateUserAndCreateTicket(Client client, Ticket newTicket) {
+        if (!updateUserAndCreateTicketEnabled) {
+            throw new IllegalStateException("Updating user and creating ticket is disabled.");
+        }
+        client.setActivation(Activation.ACTIVATED);
+        client.addTicket(newTicket);
+        sessionFactory.getCurrentSession().update(client);
+        TicketDao ticketDao = new TicketDao(sessionFactory);
+        ticketDao.saveTicket(newTicket);
     }
 }

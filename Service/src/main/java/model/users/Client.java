@@ -23,6 +23,7 @@ public class Client extends User {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
+    private Activation status;
     public Client(){}
     public Client(String name, LocalDate creationDate) {
         this.name = name;
@@ -48,6 +49,10 @@ public class Client extends User {
     public void addTicket(Ticket ticket) {
         System.out.println(ticket.getTicketId() + " Ticket has been received");
     }
+    public void setActivation(Activation isActivated){this.status = isActivated;}
+    public Activation getActivation(){return status;}
+
+
 
     @Override
     public void printRole() {

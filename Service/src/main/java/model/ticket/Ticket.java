@@ -1,5 +1,7 @@
 package model.ticket;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import model.users.Client;
 import org.example.ClassId;
 import org.example.Printable;
@@ -12,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import id.generator.IdGenerator;
 import validator.IdValidator;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "Ticket")
@@ -30,23 +33,30 @@ public class Ticket extends ClassId implements Printable {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private Client client;
 
+    @JsonProperty("typeOfTicket")
     @Enumerated(EnumType.STRING)
     @Column(name = "ticket_type", nullable = false)
     private ticketTypes ticketType;
 
+    @JsonProperty("creationDate")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creation_date", nullable = false)
     private LocalDate creationDate;
 
 
     private long userId;
     private short eventCode;
+
     private LocalTime creationTime;
+
     private String concertHall;
     private LocalDate day;
     private LocalTime time;
+
     private PromotionAvaliabilities isPromo;
     private char stadiumSector;
     private double maxWeight;
+    @JsonProperty("cost")
     private BigDecimal cost;
 
     public Ticket(){
@@ -95,7 +105,18 @@ public class Ticket extends ClassId implements Printable {
         this.ticketType = ticketType;
         this.cost = cost;
     }
-    public char[] generateId(){
+    public Ticket(Client client, LocalDate creationDate, LocalTime creationTime, ticketTypes ticketType, BigDecimal cost) {
+        this.client = client;
+        this.creationDate = creationDate;
+        this.creationTime = creationTime;
+        this.ticketType = ticketType;
+        this.cost = cost;
+        this.day = LocalDate.now();
+        this.time = LocalTime.now();
+        this.isPromo = PromotionAvaliabilities.NOINFO;
+        this.stadiumSector = 'C';
+        this.maxWeight = 0;
+    }public char[] generateId(){
         String id = null;
         char[] toReturn = new char[4];
         IdGenerator generator = new IdGenerator();
