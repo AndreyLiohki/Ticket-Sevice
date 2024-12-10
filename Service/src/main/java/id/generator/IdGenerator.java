@@ -2,7 +2,6 @@ package id.generator;
 
 import java.util.Random;
 
-
 public class IdGenerator {
     private char[] iDGenerator(int ID_LENGTH, final char[] CHAR_POOL){
         char[] generatedID = new char[ID_LENGTH];

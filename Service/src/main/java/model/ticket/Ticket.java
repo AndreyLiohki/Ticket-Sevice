@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import id.generator.IdGenerator;
 import validator.IdValidator;
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "Ticket")
