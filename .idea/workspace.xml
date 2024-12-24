@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="160a7685-7fc9-4893-a26a-2c2a338f2153" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/dao/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/dao/DatabaseManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/dao/ThisIsMyFirstConditionalBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/dao/TicketDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/dao/AppConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/dao/DatabaseManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/dao/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/dao/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/dao/TicketDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/ticket/PromotionAvaliabilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/ticket/PromotionAvaliabilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/ticket/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/ticket/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/ticket/ticketTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/ticket/ticketTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/users/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/users/Activation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/users/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/users/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/users/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/users/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/users/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/users/Roles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/model/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/model/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/reader/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/reader/FileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/senders/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/senders/EmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/senders/TelephoneSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/senders/TelephoneSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/senders/TicketSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/senders/TicketSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/services/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/services/TicketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/java/validator/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/java/validator/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Service/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2qeLLepKEKS3s4KPh97Eg2a4VQ5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "SpringSecondLesson",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Ticket-Sevice/Service"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="160a7685-7fc9-4893-a26a-2c2a338f2153" name="Changes" comment="" />
+      <created>1735018039266</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735018039266</updated>
+    </task>
+    <servers />
+  </component>
+</project>
